@@ -17,7 +17,7 @@ right_color_sensor = ColorSensor(Port.S4)
 def lineSquare(threshold=15,speed=50):
     
     while ((left_color_sensor.reflection() > threshold) and (right_color_sensor.reflection() > threshold)):
-        robot.drive(speed, 0)
+        robot.drive(-1*speed, 0)
         wait(10)
     robot.stop()
     left_motor.brake()
@@ -26,14 +26,14 @@ def lineSquare(threshold=15,speed=50):
 
     if (left_color_sensor.reflection() <= threshold):
         while (right_color_sensor.reflection() > threshold):
-            right_motor.run(100)
+            right_motor.run(-100)
             wait(10)
         left_motor.brake()
         right_motor.brake()
         
     elif (right_color_sensor.reflection() <= threshold):    
         while (left_color_sensor.reflection() > threshold):
-            left_motor.run(100)
+            left_motor.run(-100)
             wait(10)
         left_motor.brake()
         right_motor.brake()
@@ -53,4 +53,3 @@ def PR():
     while (True):
         print ("L=",left_color_sensor.reflection(),"   R=", right_color_sensor.reflection())
         wait(500)
-
